@@ -33,7 +33,7 @@ public class DepartmentInfo {
 	public void setChildren(List<EmployeeInfo> children) {
 		this.children = children;
 	}
-
+	
 	public EmployeeInfo getEmployeeInfoById(int employeeId){
 		if(this.children == null)return null;
 		if(this.children.size() == 0)return null;

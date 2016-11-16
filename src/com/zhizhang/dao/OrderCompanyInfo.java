@@ -12,6 +12,7 @@ public class OrderCompanyInfo {
 	private String qqNum;
 	private String address;
 	private String catchword;
+	private int type;
 	
 	private List<OrderListInfo> listInfo;
 	
@@ -57,6 +58,12 @@ public class OrderCompanyInfo {
 	public void setListInfo(List<OrderListInfo> listInfo) {
 		this.listInfo = listInfo;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public void parsData(Element element) {
 		this.id = Integer.parseInt(element.attributeValue("id"));
 		this.name = element.attributeValue("name");
@@ -64,6 +71,7 @@ public class OrderCompanyInfo {
 		this.qqNum = element.attributeValue("qqNum");
 		this.address = element.attributeValue("address");
 		this.catchword = element.attributeValue("catchword");
+		this.type = Integer.parseInt(element.attributeValue("type"));
 		
 		listInfo = new ArrayList<OrderListInfo>();
 		@SuppressWarnings("unchecked")
