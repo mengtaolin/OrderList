@@ -82,6 +82,15 @@ public class OrderCompanyInfo {
 			listInfo.add(orderListInfo);
 		}
 	}
+	public OrderListInfo getListInfoById(int orderListId) {
+		// TODO Auto-generated method stub
+		for(OrderListInfo info : listInfo){
+			if(info.getId() == orderListId){
+				return info;
+			}
+		}
+		return null;
+	}
 	
 	
 }

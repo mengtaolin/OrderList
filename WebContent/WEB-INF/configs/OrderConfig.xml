@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<orderCompany id="10000" name="原味汤粉王（隆江猪脚饭）1" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+<!-- type  	1：不可与type为1或者2的同时选择
+			2：不可与type为1的一起选择
+			3：可以任意选择
+ -->
+	<orderCompany id="10000" name="原味汤粉王（隆江猪脚饭）1" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力" type="1">
 		<food id="10001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="10002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="10003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
@@ -13,7 +17,7 @@
 		<food id="10010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="10011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 	</orderCompany>
-	<orderCompany id="20000" name="原味汤粉王（隆江猪脚饭）2" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+	<orderCompany id="20000" name="原味汤粉王（隆江猪脚饭）2" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力" type="1">
 		<food id="20001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="20002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="20003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
@@ -26,7 +30,7 @@
 		<food id="20010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="20011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 	</orderCompany>
-	<orderCompany id="30000" name="原味汤粉王（隆江猪脚饭）3" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+	<orderCompany id="30000" name="原味汤粉王（隆江猪脚饭）3" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力" type="2">
 		<food id="30001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="30002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="30003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
@@ -39,7 +43,7 @@
 		<food id="30010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="30011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 	</orderCompany>
-	<orderCompany id="40000" name="原味汤粉王（隆江猪脚饭）4" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+	<orderCompany id="40000" name="原味汤粉王（隆江猪脚饭）4" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力" type="3">
 		<food id="40001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="40002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
 		<food id="40003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>

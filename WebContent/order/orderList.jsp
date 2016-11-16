@@ -34,15 +34,27 @@
 		
 		function radioClick(e){
 			var tmp = e.getAttribut("name")
-			var list = $(".tmp")
+			tmp = tmp.slice("_")[1];
+			var list = $("." + tmp)
 			for(var node in list){
 				node.selected = false;
 			}
 			e.selected = true;
 		}
+		
+		function check(){
+			var element = $("#department");
+			if(element[0].value!="请选择"){
+				return true;
+			}
+			else {
+				alert("请选择点餐人员")
+				return false;
+			}
+		}
 	</script>
 <body>
-	<form action="/OrderList/doOrder" method="GET">
+	<form action="/OrderList/doOrder" method="GET" onsubmit="return check()">
 	<hr>
 	姓名：<select name="department" id="department" onchange="onChange(this)">
 	<option value="请选择">请选择</option>
@@ -76,10 +88,7 @@
 			for(OrderListInfo listInfo : orderList)
 			{
 				%>
-				<td>
-					<input type="checkbox" value="<%=listInfo.getName()%>" id="<%=listInfo.getId()%>">
-				</td>
-				<td>
+				&nbsp&nbsp&nbsp<td>
 					<%=listInfo.getName() %>
 				</td>
 				<td id="radioTd">
@@ -88,7 +97,7 @@
 					int priceLen = priceList.size();
 					for(int j = 0;j < priceLen;j ++){
 					%>
-						<input type="radio" id="price<%=j%>" name="<%=listInfo.getId()%>" onclick="radioClick(this)">
+						<input type="radio" id="price<%=j%>" name="<%=compInfo.getId() %>_<%=listInfo.getId()%>_<%=priceList.get(j) %>" onclick="radioClick(this)">
 						<%=priceList.get(j) %>元
 					<%
 					}
