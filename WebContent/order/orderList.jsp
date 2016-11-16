@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="com.zhizhang.dao.OrderCompanyInfo"%>
 <%@page import="com.zhizhang.dao.AllOrderCompanyInfo"%>
 <%@page import="com.zhizhang.dao.DepartmentInfo"%>
@@ -33,6 +34,7 @@
 		}
 		
 		function radioClick(obj){
+			var checked = obj.checked;
 			var tmp = obj.name.split("_");
 			var str = "." + tmp[1];
 			var list = $(str)
@@ -41,24 +43,69 @@
 				var node = list[i];
 				node.checked = false;
 			}
-			obj.checked = true;
+			obj.checked = checked;
 		}
 		
 		function check(){
 			var element = $("#department");
 			if(element[0].value!="请选择"){
-				return true;
+				var obj = $("input[type=checkbox]");
+				var len = obj.length;
+				var str = "您点了【";
+				var count = 0;
+				for(var i=0;i < len;i++){
+					if(obj[i].checked == true){
+						str += obj[i].getAttribute("compName") + "  " + obj[i].getAttribute("orderName");
+						count ++;
+					}
+				}
+				if(count == 0){
+					str = "您还未选择点餐内容";
+					return false
+				}
+				else{
+					str += "】\n是否确定?";
+					var close = confirm(str);
+			        if ( close) {
+			            return true;
+			        }
+			        else
+			        {
+			            return false;
+			        }
+					return true;
+				}
 			}
 			else {
 				alert("请选择点餐人员")
 				return false;
 			}
 		}
+		
+		function test(){
+			var obj = $("input[type=checkbox]");
+			var len = obj.length;
+			var str = "您点了（";
+			var count = 0;
+			for(var i=0;i < len;i++){
+				if(obj[i].checked == true){
+					str += obj[i].getAttribute("compName") + "  " + obj[i].getAttribute("orderName");
+					count ++;
+				}
+			}
+			if(count == 0){
+				str = "您还未选择点餐内容";
+			}
+			else{
+				str += "\n是否确定?"
+			}
+			alert(str);
+		}
 	</script>
 <body>
 	<form action="/OrderList/doOrder" method="GET" onsubmit="return check()">
 	<hr>
-	姓名：<select name="department" id="department" onchange="onChange(this)">
+	&nbsp&nbsp&nbsp姓名：<select name="department" id="department" onchange="onChange(this)">
 	<option value="请选择">请选择</option>
 	<%
 		CompanyDataInfo data = (CompanyDataInfo) pageContext.getServletContext().getAttribute("data");
@@ -76,6 +123,10 @@
 	<select name="employee" id="employee">
 	</select>
 	<br/>
+	&nbsp&nbsp&nbsp现在进行<%
+		Date date = new Date();
+		out.print("时间 : " + date.getHours());
+	%>点餐
 	<hr/>
 	<%
 	AllOrderCompanyInfo info = (AllOrderCompanyInfo) pageContext.getServletContext().getAttribute("allOrderInfo");
@@ -99,7 +150,11 @@
 					int priceLen = priceList.size();
 					for(int j = 0;j < priceLen;j ++){
 					%>
-						<input type="radio" id="price<%=j%>" class="<%=listInfo.getId()%>" name="<%=compInfo.getId() %>_<%=listInfo.getId()%>_<%=priceList.get(j) %>" onclick="radioClick(this)">
+						<input type="checkbox" id="price<%=j%>" class="<%=listInfo.getId()%>" 
+						name="<%=compInfo.getId() %>_<%=listInfo.getId()%>_<%=priceList.get(j) %>"
+						compName="<%=compInfo.getName() %>" 
+						orderName="<%=listInfo.getName() %>"
+						onclick="radioClick(this)">
 						<%=priceList.get(j) %>元
 					<%
 					}
@@ -118,8 +173,11 @@
 	<div id="selectDepartment"></div>
 	<div id="selectOrder"></div>
 	<br/>
-	<input type="submit" value="提交">
+	<input type="submit" value="提交">&nbsp&nbsp<input type="button" onclick="test()" value="测试">
 	</form>
-	
+	<hr/>
+	&nbsp&nbsp&nbsp<jsp:include page="everydayOrder.jsp"></jsp:include>
+	<hr/>
+	<br/>
 </body>
 </html>

@@ -41,6 +41,7 @@ public class DoOrderServlet extends HttpServlet {
 	}
 
 	/**
+	 * 提交数据内容
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -81,6 +82,7 @@ public class DoOrderServlet extends HttpServlet {
 			orderPriceInfo.setCompName(orderCompInfo.getName());
 			orderPriceInfoList[i] = orderPriceInfo;
 		}
+		
 		selectOrderInfo.setOrderPriceInfo(orderPriceInfoList);
 		request.setAttribute("selectOrderInfo", selectOrderInfo);
 		request.getRequestDispatcher("order/success.jsp").forward(request, response);

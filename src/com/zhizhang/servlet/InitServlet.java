@@ -1,10 +1,15 @@
 package com.zhizhang.servlet;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
@@ -29,6 +34,7 @@ import com.zhizhang.dao.OrderCompanyInfo;
 import net.sf.json.JSONObject;
 
 /**
+ * 初始化数据内容
  * Servlet implementation class InitServlet
  */
 @WebServlet(description = "初始化加载数据的servlet", urlPatterns = { "/InitServlet" })
@@ -36,6 +42,7 @@ public class InitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private CompanyDataInfo data;
     private AllOrderCompanyInfo allOrderInfo;
+    private Map<String, String> timeMap = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -45,6 +52,7 @@ public class InitServlet extends HttpServlet {
     }
 
 	/**
+	 * 初始化系统参数，第一步就将配置数据全部导入
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
@@ -53,9 +61,31 @@ public class InitServlet extends HttpServlet {
 			FileInputStream fis = null;
 			this.parseCompanyData(config, realPath, reader, fis);
 			this.parseOrderCompanyData(config, realPath, reader, fis);
-			System.out.println("hello");
+			
+			this.parseProperties(realPath);
 	}
 	
+	private void parseProperties(String realPath) {
+		InputStream in;
+		try {
+			in = new BufferedInputStream (new FileInputStream("a.properties"));
+			Properties prop = new Properties();
+			prop.load(in);     ///加载属性列表
+			Iterator<String> it=prop.stringPropertyNames().iterator();
+			while(it.hasNext()){
+				String key=it.next();
+				System.out.println(key+":"+prop.getProperty(key));
+			}
+			in.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 解析我们本公司的数据
 	 * @param config
@@ -141,6 +171,7 @@ public class InitServlet extends HttpServlet {
 	
 
 	/**
+	 * 实现初始化后的跳转
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -150,6 +181,7 @@ public class InitServlet extends HttpServlet {
 	}
 
 	/**
+	 * 实现前端的选择部门后再选择对应部门中的员工
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -157,12 +189,14 @@ public class InitServlet extends HttpServlet {
 		int departId = Integer.parseInt(request.getParameter("selectId"));
 		System.out.println("doPost :" + departId);
 		DepartmentInfo department = this.data.getDepartmentById(departId);
+		
+		//转换为json格式，转化Json格式对象必须是Bean对象，既所有属性都实现了get，set方法。
 		JSONObject jsonObj = new JSONObject();
 		@SuppressWarnings("static-access")
 		JSONObject json = jsonObj.fromObject(department);
 		
-		response.setHeader("Content-type", "text/html;charset=UTF-8");  
 		//这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859  
+		response.setHeader("Content-type", "text/html;charset=UTF-8");  
 		response.setCharacterEncoding("UTF-8");  
 		PrintWriter out = response.getWriter();
 		out.write(json.toString());
