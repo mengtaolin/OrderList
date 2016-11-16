@@ -8,6 +8,6 @@ for(var i= 0;i < len;i ++)
 {
     var child = list[i]
     element.appendChild("<option label='" + child.name + "' value='" + child.id + "'>" + child.name+ "</option>");
-var tmp = tmp.slice("_")[1]
+var tmp = "".split("_")
 }
 element.selectedIndex = 0;

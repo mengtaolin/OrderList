@@ -32,14 +32,16 @@
 			});
 		}
 		
-		function radioClick(e){
-			var tmp = e.getAttribut("name")
-			tmp = tmp.slice("_")[1];
-			var list = $("." + tmp)
-			for(var node in list){
-				node.selected = false;
+		function radioClick(obj){
+			var tmp = obj.name.split("_");
+			var str = "." + tmp[1];
+			var list = $(str)
+			var len = list.length;
+			for(var i= 0;i< len;i ++){
+				var node = list[i];
+				node.checked = false;
 			}
-			e.selected = true;
+			obj.checked = true;
 		}
 		
 		function check(){
@@ -97,7 +99,7 @@
 					int priceLen = priceList.size();
 					for(int j = 0;j < priceLen;j ++){
 					%>
-						<input type="radio" id="price<%=j%>" name="<%=compInfo.getId() %>_<%=listInfo.getId()%>_<%=priceList.get(j) %>" onclick="radioClick(this)">
+						<input type="radio" id="price<%=j%>" class="<%=listInfo.getId()%>" name="<%=compInfo.getId() %>_<%=listInfo.getId()%>_<%=priceList.get(j) %>" onclick="radioClick(this)">
 						<%=priceList.get(j) %>元
 					<%
 					}
