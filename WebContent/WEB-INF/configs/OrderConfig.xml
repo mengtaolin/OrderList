@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<orderCompany id="10000" name="原味汤粉王（隆江猪脚饭）1" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+		<food id="10001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10004" name="隆江猪脚饭4" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10005" name="隆江猪脚饭5" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10006" name="隆江猪脚饭6" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10007" name="隆江猪脚饭7" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10008" name="隆江猪脚饭8" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10009" name="隆江猪脚饭9" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="10011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+	</orderCompany>
+	<orderCompany id="20000" name="原味汤粉王（隆江猪脚饭）2" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+		<food id="20001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20004" name="隆江猪脚饭4" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20005" name="隆江猪脚饭5" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20006" name="隆江猪脚饭6" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20007" name="隆江猪脚饭7" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20008" name="隆江猪脚饭8" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20009" name="隆江猪脚饭9" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="20011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+	</orderCompany>
+	<orderCompany id="30000" name="原味汤粉王（隆江猪脚饭）3" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+		<food id="30001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30004" name="隆江猪脚饭4" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30005" name="隆江猪脚饭5" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30006" name="隆江猪脚饭6" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30007" name="隆江猪脚饭7" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30008" name="隆江猪脚饭8" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30009" name="隆江猪脚饭9" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="30011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+	</orderCompany>
+	<orderCompany id="40000" name="原味汤粉王（隆江猪脚饭）4" telNum="020-61955228" qqNum="" address="市新路北段838号" catchword="为了您的满意，我们倍加努力">
+		<food id="40001" name="隆江猪脚饭1" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40002" name="隆江猪脚饭2" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40003" name="隆江猪脚饭3" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40004" name="隆江猪脚饭4" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40005" name="隆江猪脚饭5" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40006" name="隆江猪脚饭6" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40007" name="隆江猪脚饭7" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40008" name="隆江猪脚饭8" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40009" name="隆江猪脚饭9" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40010" name="隆江猪脚饭10" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+		<food id="40011" name="隆江猪脚饭11" price="10-12-15" image="../images/longjiangzhujiaofan.jpg"></food>
+	</orderCompany>
+</root>

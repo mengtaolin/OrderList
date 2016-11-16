@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<depart id="1000" name="老板">
+		<employee id="1001">林乙彬</employee>
+		<employee id="1002">林乙鑫</employee>
+		<employee id="1003">廖伟创</employee>
+	</depart>
+	<depart id="2000" name="人事部">
+		<employee id="2001">林孟涛</employee>
+		<employee id="2002">谢子茵</employee>
+	</depart>
+	<depart id="3000" name="销售部">
+		<employee id="3001">庄培隆</employee>
+		<employee id="3002">曾韩</employee>
+		<employee id="3003">梁羽</employee>
+		<employee id="3004">曾晓敏</employee>
+		<employee id="3005">廖昌贤</employee>
+		<employee id="3006">廖锡豪</employee>
+		<employee id="3007">萧彩敬</employee>
+	</depart>
+	<depart id="4000" name="仓库部">
+		<employee id="4001">廖键伟</employee>
+		<employee id="4002">陈绪豪</employee>
+		<employee id="4003">连锡滨</employee>
+		<employee id="4004">徐展</employee>
+		<employee id="4005">廖润泽</employee>
+		<employee id="4006">陈勇民</employee>
+	</depart>
+	<depart id="5000" name="物流部">
+		<employee id="5001">陈志鹏</employee>
+		<employee id="5002">洪键</employee>
+		<employee id="5003">陈俊儒</employee>
+		<employee id="5004">廖昇镇</employee>
+		<employee id="5005">高建荣</employee>
+		<employee id="5006">梁成就</employee>
+		<employee id="5007">温圣意</employee>
+		<employee id="5008">钟晓东</employee>
+		<employee id="5009">庞祝强</employee>
+	</depart>
+	<depart id="6000" name="采购部">
+		<employee id="6001">廖绪智</employee>
+		<employee id="6001">刘嘉琦</employee>
+	</depart>
+	<depart id="7000" name="其他">
+		<employee id="7001"></employee>
+	</depart>
+</root>
