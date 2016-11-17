@@ -1,3 +1,4 @@
+<%@page import="com.zhizhang.CheckUtil"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.zhizhang.dao.OrderCompanyInfo"%>
 <%@page import="com.zhizhang.dao.AllOrderCompanyInfo"%>
@@ -47,6 +48,7 @@
 		}
 		
 		function check(){
+			
 			var element = $("#department");
 			if(element[0].value!="请选择"){
 				var obj = $("input[type=checkbox]");
@@ -123,10 +125,10 @@
 	<select name="employee" id="employee">
 	</select>
 	<br/>
-	&nbsp&nbsp&nbsp现在进行<%
+	&nbsp&nbsp&nbsp点餐进行中<%
 		Date date = new Date();
-		out.print("时间 : " + date.getHours());
-	%>点餐
+		out.print("时间为 : " + CheckUtil.orderTime());
+	%>
 	<hr/>
 	<%
 	AllOrderCompanyInfo info = (AllOrderCompanyInfo) pageContext.getServletContext().getAttribute("allOrderInfo");

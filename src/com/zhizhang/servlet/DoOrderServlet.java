@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zhizhang.CheckUtil;
 import com.zhizhang.XMLUtil;
 import com.zhizhang.dao.AllOrderCompanyInfo;
 import com.zhizhang.dao.CompanyDataInfo;
@@ -42,8 +43,7 @@ public class DoOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.doPost(request, response);
+		
 	}
 
 	/**
@@ -52,6 +52,9 @@ public class DoOrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(CheckUtil.checkTime() == false){
+			return;
+		}
 		Map<String,String[]> map = request.getParameterMap();
 		int count = 0;
 		String[] selectList = new String[map.size() - 2];
@@ -100,11 +103,16 @@ public class DoOrderServlet extends HttpServlet {
 	private void createXmlFile(SelectOrderInfo selectOrderInfo){
 		
 		Date date = new Date();
+		String timeType = CheckUtil.timeType();
 		String realPath = this.getServletContext().getRealPath("/WEB-INF/configs/everyDayOrder/");
-		String fileName = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date)+ "\\" + selectOrderInfo.getDepartment() + "_" + selectOrderInfo.getEmployee() + ".xml";
+		String fileName = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date)+ "\\" + timeType + "\\" + selectOrderInfo.getDepartment() + "_" + selectOrderInfo.getEmployee() + ".xml";
 		String dirName = realPath + SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date);
 		File file = new File(dirName);
 		if(file.exists() == false){
+			file.mkdirs();
+		}
+		File subFile = new File(dirName + "\\" + timeType);
+		if(subFile.exists() == false){
 			file.mkdirs();
 		}
 		xmlUtil.create(selectOrderInfo, realPath + fileName);

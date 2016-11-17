@@ -27,10 +27,12 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.zhizhang.CheckUtil;
 import com.zhizhang.dao.AllOrderCompanyInfo;
 import com.zhizhang.dao.CompanyDataInfo;
 import com.zhizhang.dao.DepartmentInfo;
 import com.zhizhang.dao.OrderCompanyInfo;
+import com.zhizhang.dao.OrderPriceInfo;
 
 import net.sf.json.JSONObject;
 
@@ -60,10 +62,10 @@ public class InitServlet extends HttpServlet {
 			String realPath = config.getServletContext().getRealPath("/WEB-INF/");
 			SAXReader reader = new SAXReader();
 			FileInputStream fis = null;
+			this.parseProperties(config, realPath);
 			this.parseCompanyData(config, realPath, reader, fis);
 			this.parseOrderCompanyData(config, realPath, reader, fis);
-			
-			this.parseProperties(config, realPath);
+			OrderPriceInfo[] infos = new OrderPriceInfo[2];
 	}
 	
 	private void parseProperties(ServletConfig config, String realPath) {
@@ -73,7 +75,7 @@ public class InitServlet extends HttpServlet {
 			Properties prop = new Properties();
 			prop.load(in);     ///加载属性列表
 			Iterator<String> it=prop.stringPropertyNames().iterator();
-			this.timeMap = new HashMap<String,String>();
+			CheckUtil.timeMap = this.timeMap = new HashMap<String,String>();
 			while(it.hasNext()){
 				String key=it.next();
 				timeMap.put(key, prop.getProperty(key));
@@ -179,7 +181,11 @@ public class InitServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher d = request.getRequestDispatcher("order/orderList.jsp");
+		String url = "order/orderList.jsp";
+		if(CheckUtil.checkTime() == false){
+			url = "order/noOpenTime.jsp";
+		}
+		RequestDispatcher d = request.getRequestDispatcher(url);
 		d.forward(request,response);
 	}
 
