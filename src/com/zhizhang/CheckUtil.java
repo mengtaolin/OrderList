@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class CheckUtil {
 	public static Map<String,String> timeMap = null;
+	
 	public static boolean checkTime(){
 		if(timeMap == null)return false;
 		int lunchStartH = Integer.parseInt(timeMap.get("lunchStartH"));
@@ -99,5 +100,10 @@ public class CheckUtil {
 		int lunchEndM = Integer.parseInt(timeMap.get("lunchEndM"));
 		str = lunchStartH + ":" + lunchStartM + " 到 " + lunchEndH + ":" + lunchEndM;
 		return str;
+	}
+	
+	public static String getPropValue(String key){
+		String value = timeMap.get(key);
+		return value;
 	}
 }

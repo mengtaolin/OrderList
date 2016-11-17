@@ -104,9 +104,10 @@ public class DoOrderServlet extends HttpServlet {
 		
 		Date date = new Date();
 		String timeType = CheckUtil.timeType();
-		String realPath = this.getServletContext().getRealPath("/WEB-INF/configs/everyDayOrder/");
-		String fileName = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date)+ "\\" + timeType + "\\" + selectOrderInfo.getDepartment() + "_" + selectOrderInfo.getEmployee() + ".xml";
-		String dirName = realPath + SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date);
+		String realPath = this.getServletContext().getRealPath(CheckUtil.getPropValue("orderDir"));
+		String dateStr = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date);
+		String fileName = dateStr + "\\" + timeType + "\\" + selectOrderInfo.getDepartmentId() + "_" + selectOrderInfo.getEmployeeId() + ".xml";
+		String dirName = realPath + dateStr;
 		File file = new File(dirName);
 		if(file.exists() == false){
 			file.mkdirs();
@@ -116,6 +117,8 @@ public class DoOrderServlet extends HttpServlet {
 			file.mkdirs();
 		}
 		xmlUtil.create(selectOrderInfo, realPath + fileName);
+		file = null;
+		subFile = null;
 	}
 
 }

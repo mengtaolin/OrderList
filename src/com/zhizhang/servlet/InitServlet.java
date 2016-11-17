@@ -65,7 +65,6 @@ public class InitServlet extends HttpServlet {
 			this.parseProperties(config, realPath);
 			this.parseCompanyData(config, realPath, reader, fis);
 			this.parseOrderCompanyData(config, realPath, reader, fis);
-			OrderPriceInfo[] infos = new OrderPriceInfo[2];
 	}
 	
 	private void parseProperties(ServletConfig config, String realPath) {
@@ -211,7 +210,7 @@ public class InitServlet extends HttpServlet {
 		out.write(json.toString());
 		out.flush();
 		out.close();
-		
+		out = null;
 	}
 
 }
