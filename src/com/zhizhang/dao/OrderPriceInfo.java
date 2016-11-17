@@ -1,6 +1,10 @@
 package com.zhizhang.dao;
 
-public class OrderPriceInfo {
+import org.dom4j.Element;
+
+import com.zhizhang.interfaces.XmlInterface;
+
+public class OrderPriceInfo implements XmlInterface{
 	private int compId;
 	private String compName;
 	private int orderId;
@@ -35,5 +39,24 @@ public class OrderPriceInfo {
 	}
 	public void setCompName(String compName) {
 		this.compName = compName;
+	}
+	public String toXml() {
+		// TODO Auto-generated method stub
+		String xml = "<orderPriceInfo>";
+		xml += "<compId>" + this.getCompId() + "</compId>";
+		xml += "<compName>" + this.getCompName() + "</compName>";
+		xml += "<orderId>" + this.getOrderId() + "</orderId>";
+		xml += "<orderName>" + this.getOrderName() + "</orderName>";
+		xml += "<price>" + this.getPrice() + "</price>";
+		xml += "</orderPriceInfo>";
+		return xml;
+	}
+	public void parseFromXml(Element element) {
+		// TODO Auto-generated method stub
+		this.setCompId(Integer.parseInt(element.elementText("compId")));
+		this.setCompName(element.elementText("compName"));
+		this.setOrderId(Integer.parseInt(element.elementText("orderId")));
+		this.setOrderName(element.elementText("orderName"));
+		this.setPrice(Float.parseFloat(element.elementText("price")));
 	}
 }

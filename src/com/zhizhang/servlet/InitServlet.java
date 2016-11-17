@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -62,20 +63,22 @@ public class InitServlet extends HttpServlet {
 			this.parseCompanyData(config, realPath, reader, fis);
 			this.parseOrderCompanyData(config, realPath, reader, fis);
 			
-			this.parseProperties(realPath);
+			this.parseProperties(config, realPath);
 	}
 	
-	private void parseProperties(String realPath) {
+	private void parseProperties(ServletConfig config, String realPath) {
 		InputStream in;
 		try {
-			in = new BufferedInputStream (new FileInputStream("a.properties"));
+			in = new BufferedInputStream (new FileInputStream(realPath + "/configs/prop.properties"));
 			Properties prop = new Properties();
 			prop.load(in);     ///加载属性列表
 			Iterator<String> it=prop.stringPropertyNames().iterator();
+			this.timeMap = new HashMap<String,String>();
 			while(it.hasNext()){
 				String key=it.next();
-				System.out.println(key+":"+prop.getProperty(key));
+				timeMap.put(key, prop.getProperty(key));
 			}
+			config.getServletContext().setAttribute("timeMap", timeMap);
 			in.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -149,10 +152,10 @@ public class InitServlet extends HttpServlet {
 			config.getServletContext().setAttribute("allOrderInfo", this.allOrderInfo);
 			fis.close();
 			fis = null;
-			JSONObject jsonObj = new JSONObject();
-			@SuppressWarnings("static-access")
-			JSONObject json = jsonObj.fromObject(allOrderInfo);
-			System.out.println(json.toString());
+//			JSONObject jsonObj = new JSONObject();
+//			@SuppressWarnings("static-access")
+//			JSONObject json = jsonObj.fromObject(allOrderInfo);
+//			System.out.println(json.toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

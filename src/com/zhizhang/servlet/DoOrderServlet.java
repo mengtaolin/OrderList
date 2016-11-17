@@ -1,6 +1,10 @@
 package com.zhizhang.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zhizhang.XMLUtil;
 import com.zhizhang.dao.AllOrderCompanyInfo;
 import com.zhizhang.dao.CompanyDataInfo;
 import com.zhizhang.dao.DepartmentInfo;
@@ -23,7 +28,8 @@ import com.zhizhang.dao.SelectOrderInfo;
 @WebServlet(description = "处理下单的Servlet", urlPatterns = { "/DoOrderServlet" })
 public class DoOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private XMLUtil xmlUtil = new XMLUtil();
+    private String realPath = "";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -84,9 +90,24 @@ public class DoOrderServlet extends HttpServlet {
 		}
 		
 		selectOrderInfo.setOrderPriceInfo(orderPriceInfoList);
+		this.createXmlFile(selectOrderInfo);
+		
 		request.setAttribute("selectOrderInfo", selectOrderInfo);
 		request.getRequestDispatcher("order/success.jsp").forward(request, response);
 		
+	}
+	
+	private void createXmlFile(SelectOrderInfo selectOrderInfo){
+		
+		Date date = new Date();
+		String realPath = this.getServletContext().getRealPath("/WEB-INF/configs/everyDayOrder/");
+		String fileName = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date)+ "\\" + selectOrderInfo.getDepartment() + "_" + selectOrderInfo.getEmployee() + ".xml";
+		String dirName = realPath + SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date);
+		File file = new File(dirName);
+		if(file.exists() == false){
+			file.mkdirs();
+		}
+		xmlUtil.create(selectOrderInfo, realPath + fileName);
 	}
 
 }

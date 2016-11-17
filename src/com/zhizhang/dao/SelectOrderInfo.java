@@ -1,6 +1,15 @@
 package com.zhizhang.dao;
 
-public class SelectOrderInfo {
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.dom4j.Element;
+
+import com.zhizhang.interfaces.XmlInterface;
+
+@XmlRootElement
+public class SelectOrderInfo implements XmlInterface{
 	private int departmentId;
 	private int employeeId;
 	private String department;
@@ -44,5 +53,36 @@ public class SelectOrderInfo {
 			price += info.getPrice();
 		}
 		return price;
+	}
+	public void parseFromXml(Element root){
+		this.setDepartment(root.elementText("department"));
+		this.setDepartmentId(Integer.parseInt(root.elementText("departmentId")));
+		this.setEmployee(root.elementText("employee"));
+		this.setEmployeeId(Integer.parseInt(root.elementText("employeeId")));
+		Element priceElement = root.element("orderPriceInfo");
+		@SuppressWarnings("unchecked")
+		List<Element> list = priceElement.elements();
+		int len = list.size();
+		OrderPriceInfo[] orderPriceList = new OrderPriceInfo[len];
+		for(int i=0;i < len;i ++){
+			OrderPriceInfo info = new OrderPriceInfo();
+			info.parseFromXml(list.get(i));
+			orderPriceList[i] = info;
+		}
+		this.setOrderPriceInfo(orderPriceList);
+	}
+	
+	public String toXml(){
+		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+		xml += "<selectOrderInfo>";
+		xml += "<department>" + this.getDepartment() + "</department>";
+		xml += "<departmentId>" + this.getDepartmentId() + "</departmentId>";
+		xml += "<employee>" + this.getEmployee() + "</employee>";
+		xml += "<employeeId>" + this.getEmployeeId() + "</employeeId>";
+		for(OrderPriceInfo info : this.orderPriceInfo){
+			xml += info.toXml();
+		}
+		xml += "</selectOrderInfo>";
+		return xml;
 	}
 }
