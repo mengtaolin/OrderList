@@ -178,7 +178,7 @@
 	<input type="submit" value="提交">&nbsp&nbsp<input type="button" onclick="test()" value="测试">
 	</form>
 	<hr/>
-	&nbsp&nbsp&nbsp<jsp:include page="everydayOrder.jsp"></jsp:include>
+	&nbsp&nbsp&nbsp<a href="checkEveryDayOrder">查看点餐内容</a>
 	<hr/>
 	<br/>
 </body>

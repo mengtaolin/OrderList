@@ -1,5 +1,7 @@
 package com.zhizhang;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -36,11 +38,11 @@ public class CheckUtil {
 	}
 	
 	/**
-	 * 返回早上，中午，还是晚上
+	 * 杩斿洖鏃╀笂锛屼腑鍗堬紝杩樻槸鏅氫笂
 	 * @return
 	 */
 	public static String timeType(){
-		String str = "早餐";
+		String str = "鏃╅";
 		Date date = new Date(System.currentTimeMillis());
 		int breakfastStartH = Integer.parseInt(timeMap.get("breakfastStartH"));
 		int breakfastStartM = Integer.parseInt(timeMap.get("breakfastStartM"));
@@ -59,33 +61,33 @@ public class CheckUtil {
 		int curMinutes = date.getMinutes();
 		if(breakfastStartH == curHour){
 			if(breakfastStartM <= curMinutes){
-				str = "早餐";
+				str = "鏃╅";
 			}
 		}
 		if(breakfastEndH == curHour){
 			if(breakfastEndM > curMinutes){
-				str = "早餐";
+				str = "鏃╅";
 			}
 		}
 		
 		if(lunchStartH == curHour){
 			if(lunchStartM <= curMinutes){
-				str = "午餐";
+				str = "鍗堥";
 			}
 		}
 		if(lunchEndH == curHour){
 			if(lunchEndM > curMinutes){
-				str = "午餐";
+				str = "鍗堥";
 			}
 		}
 		if(dinnerStratH == curHour){
 			if(dinnerStratM <= curMinutes){
-				str = "晚餐";
+				str = "鏅氶";
 			}
 		}
 		if(dinnerEndH == curHour){
 			if(dinnerEndM > curMinutes){
-				str = "晚餐";
+				str = "鏅氶";
 			}
 		}
 		
@@ -98,12 +100,30 @@ public class CheckUtil {
 		int lunchStartM = Integer.parseInt(timeMap.get("lunchStartM"));
 		int lunchEndH = Integer.parseInt(timeMap.get("lunchEndH"));
 		int lunchEndM = Integer.parseInt(timeMap.get("lunchEndM"));
-		str = lunchStartH + ":" + lunchStartM + " 到 " + lunchEndH + ":" + lunchEndM;
+		str = lunchStartH + ":" + lunchStartM + "至" + lunchEndH + ":" + lunchEndM;
 		return str;
 	}
 	
 	public static String getPropValue(String key){
 		String value = timeMap.get(key);
 		return value;
+	}
+	
+	/**
+	 * 返回 **-**-**
+	 * @return
+	 */
+	public static String getCurDate(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("y-M-d");
+		String str = format.format(date);
+		return str;
+	}
+	
+	public static String getCurDate1(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("y年M月d日");
+		String str = format.format(date);
+		return str;
 	}
 }

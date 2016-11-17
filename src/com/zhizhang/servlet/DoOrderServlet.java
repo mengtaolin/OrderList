@@ -105,7 +105,7 @@ public class DoOrderServlet extends HttpServlet {
 		Date date = new Date();
 		String timeType = CheckUtil.timeType();
 		String realPath = this.getServletContext().getRealPath(CheckUtil.getPropValue("orderDir"));
-		String dateStr = SimpleDateFormat.getDateInstance(SimpleDateFormat.YEAR_FIELD).format(date);
+		String dateStr = CheckUtil.getCurDate1();
 		String fileName = dateStr + "\\" + timeType + "\\" + selectOrderInfo.getDepartmentId() + "_" + selectOrderInfo.getEmployeeId() + ".xml";
 		String dirName = realPath + dateStr;
 		File file = new File(dirName);
