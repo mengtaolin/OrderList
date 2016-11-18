@@ -1,23 +1,58 @@
 package com.zhizhang;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
 public class CheckUtil {
-	public static Map<String,String> timeMap = null;
 	
+	public static Map<String,String> timeMap 	= null;
+	private static int breakfastStartH 		= 0;
+	private static int breakfastStartM 		= 0;
+	private static int breakfastEndH 			= 0;
+	private static int breakfastEndM 			= 0;
+	private static int lunchStartH 			= 0;
+	private static int lunchStartM 			= 0;
+	private static int lunchEndH 				= 0;
+	private static int lunchEndM 				= 0;
+	private static int dinnerStratH 			= 0;
+	private static int dinnerStratM 			= 0;
+	private static int dinnerEndH 				= 0;
+	private static int dinnerEndM 				= 0;
+	
+	public static void init(Map<String,String> map){
+		timeMap 			= map;
+		breakfastStartH 	= Integer.parseInt(timeMap.get("breakfastStartH"));
+		breakfastStartM 	= Integer.parseInt(timeMap.get("breakfastStartM"));
+		breakfastEndH 		= Integer.parseInt(timeMap.get("breakfastEndH"));
+		breakfastEndM 		= Integer.parseInt(timeMap.get("breakfastEndM"));
+		lunchStartH 		= Integer.parseInt(timeMap.get("lunchStartH"));
+		lunchStartM 		= Integer.parseInt(timeMap.get("lunchStartM"));
+		lunchEndH 			= Integer.parseInt(timeMap.get("lunchEndH"));
+		lunchEndM 			= Integer.parseInt(timeMap.get("lunchEndM"));
+		dinnerStratH 		= Integer.parseInt(timeMap.get("dinnerStratH"));
+		dinnerStratM 		= Integer.parseInt(timeMap.get("dinnerStratM"));
+		dinnerEndH 			= Integer.parseInt(timeMap.get("dinnerEndH"));
+		dinnerEndM 			= Integer.parseInt(timeMap.get("dinnerEndM"));
+	}
+	
+	@SuppressWarnings("deprecation")
 	public static boolean checkTime(){
 		if(timeMap == null)return false;
-		int lunchStartH = Integer.parseInt(timeMap.get("lunchStartH"));
-		int lunchStartM = Integer.parseInt(timeMap.get("lunchStartM"));
-		int lunchEndH = Integer.parseInt(timeMap.get("lunchEndH"));
-		int lunchEndM = Integer.parseInt(timeMap.get("lunchEndM"));
 		Date date = new Date(System.currentTimeMillis());
+		if(breakfastStartH > breakfastEndH){
+			return false;
+		}else if(breakfastStartH == breakfastEndH && breakfastStartM >= breakfastEndM){
+			return false;
+		}
 		if(lunchStartH > lunchEndH){
 			return false;
 		}else if(lunchStartH == lunchEndH && lunchStartM >= lunchEndM){
+			return false;
+		}
+		if(dinnerStratH > dinnerEndH){
+			return false;
+		}else if(dinnerStratH == dinnerEndH && dinnerStratM >= dinnerEndM){
 			return false;
 		}
 		
@@ -38,56 +73,46 @@ public class CheckUtil {
 	}
 	
 	/**
-	 * 杩斿洖鏃╀笂锛屼腑鍗堬紝杩樻槸鏅氫笂
+	 * 返回早上，中午，还是晚上
 	 * @return
 	 */
 	public static String timeType(){
-		String str = "鏃╅";
+		String str = "";
 		Date date = new Date(System.currentTimeMillis());
-		int breakfastStartH = Integer.parseInt(timeMap.get("breakfastStartH"));
-		int breakfastStartM = Integer.parseInt(timeMap.get("breakfastStartM"));
-		int breakfastEndH = Integer.parseInt(timeMap.get("breakfastEndH"));
-		int breakfastEndM = Integer.parseInt(timeMap.get("breakfastEndM"));
-		int lunchStartH = Integer.parseInt(timeMap.get("lunchStartH"));
-		int lunchStartM = Integer.parseInt(timeMap.get("lunchStartM"));
-		int lunchEndH = Integer.parseInt(timeMap.get("lunchEndH"));
-		int lunchEndM = Integer.parseInt(timeMap.get("lunchEndM"));
-		int dinnerStratH = Integer.parseInt(timeMap.get("dinnerStratH"));
-		int dinnerStratM = Integer.parseInt(timeMap.get("dinnerStratM"));
-		int dinnerEndH = Integer.parseInt(timeMap.get("dinnerEndH"));
-		int dinnerEndM = Integer.parseInt(timeMap.get("dinnerEndM"));
 		
+		@SuppressWarnings("deprecation")
 		int curHour = date.getHours();
+		@SuppressWarnings("deprecation")
 		int curMinutes = date.getMinutes();
 		if(breakfastStartH == curHour){
 			if(breakfastStartM <= curMinutes){
-				str = "鏃╅";
+				str = "早餐";
 			}
 		}
 		if(breakfastEndH == curHour){
 			if(breakfastEndM > curMinutes){
-				str = "鏃╅";
+				str = "早餐";
 			}
 		}
 		
 		if(lunchStartH == curHour){
 			if(lunchStartM <= curMinutes){
-				str = "鍗堥";
+				str = "午餐";
 			}
 		}
 		if(lunchEndH == curHour){
 			if(lunchEndM > curMinutes){
-				str = "鍗堥";
+				str = "午餐";
 			}
 		}
 		if(dinnerStratH == curHour){
 			if(dinnerStratM <= curMinutes){
-				str = "鏅氶";
+				str = "晚餐";
 			}
 		}
 		if(dinnerEndH == curHour){
 			if(dinnerEndM > curMinutes){
-				str = "鏅氶";
+				str = "晚餐";
 			}
 		}
 		
@@ -96,10 +121,6 @@ public class CheckUtil {
 	
 	public static String orderTime(){
 		String str = "";
-		int lunchStartH = Integer.parseInt(timeMap.get("lunchStartH"));
-		int lunchStartM = Integer.parseInt(timeMap.get("lunchStartM"));
-		int lunchEndH = Integer.parseInt(timeMap.get("lunchEndH"));
-		int lunchEndM = Integer.parseInt(timeMap.get("lunchEndM"));
 		str = lunchStartH + ":" + lunchStartM + "至" + lunchEndH + ":" + lunchEndM;
 		return str;
 	}

@@ -32,7 +32,7 @@ import com.zhizhang.dao.AllOrderCompanyInfo;
 import com.zhizhang.dao.CompanyDataInfo;
 import com.zhizhang.dao.DepartmentInfo;
 import com.zhizhang.dao.OrderCompanyInfo;
-import com.zhizhang.dao.OrderPriceInfo;
+import com.zhizhang.dao.selectOrder.OrderPriceInfo;
 
 import net.sf.json.JSONObject;
 
@@ -74,11 +74,12 @@ public class InitServlet extends HttpServlet {
 			Properties prop = new Properties();
 			prop.load(in);     ///加载属性列表
 			Iterator<String> it=prop.stringPropertyNames().iterator();
-			CheckUtil.timeMap = this.timeMap = new HashMap<String,String>();
+			this.timeMap = new HashMap<String,String>();
 			while(it.hasNext()){
 				String key=it.next();
 				timeMap.put(key, prop.getProperty(key));
 			}
+			CheckUtil.init(this.timeMap);
 			config.getServletContext().setAttribute("timeMap", timeMap);
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -112,6 +113,7 @@ public class InitServlet extends HttpServlet {
 				this.data.departments.add(department);
 			}
 			config.getServletContext().setAttribute("data", this.data);
+			
 			fis.close();
 			fis = null;
 		} catch (FileNotFoundException e) {

@@ -2,8 +2,6 @@ package com.zhizhang.servlet;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -20,8 +18,8 @@ import com.zhizhang.dao.CompanyDataInfo;
 import com.zhizhang.dao.DepartmentInfo;
 import com.zhizhang.dao.OrderCompanyInfo;
 import com.zhizhang.dao.OrderListInfo;
-import com.zhizhang.dao.OrderPriceInfo;
-import com.zhizhang.dao.SelectOrderInfo;
+import com.zhizhang.dao.selectOrder.OrderPriceInfo;
+import com.zhizhang.dao.selectOrder.SelectOrderInfo;
 
 /**
  * Servlet implementation class DoOrderServlet
@@ -30,7 +28,6 @@ import com.zhizhang.dao.SelectOrderInfo;
 public class DoOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private XMLUtil xmlUtil = new XMLUtil();
-    private String realPath = "";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -102,10 +99,9 @@ public class DoOrderServlet extends HttpServlet {
 	
 	private void createXmlFile(SelectOrderInfo selectOrderInfo){
 		
-		Date date = new Date();
 		String timeType = CheckUtil.timeType();
 		String realPath = this.getServletContext().getRealPath(CheckUtil.getPropValue("orderDir"));
-		String dateStr = CheckUtil.getCurDate1();
+		String dateStr = CheckUtil.getCurDate();
 		String fileName = dateStr + "\\" + timeType + "\\" + selectOrderInfo.getDepartmentId() + "_" + selectOrderInfo.getEmployeeId() + ".xml";
 		String dirName = realPath + dateStr;
 		File file = new File(dirName);
