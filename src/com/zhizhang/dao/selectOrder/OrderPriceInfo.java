@@ -5,10 +5,25 @@ import org.dom4j.Element;
 import com.zhizhang.interfaces.XmlInterface;
 
 public class OrderPriceInfo implements XmlInterface{
+	/**
+	 * 餐饮提供公司ID
+	 */
 	private int compId;
+	/**
+	 * 餐饮提供公司名称
+	 */
 	private String compName;
+	/**
+	 * 食品ID
+	 */
 	private int orderId;
+	/**
+	 * 食品名称
+	 */
 	private String orderName;
+	/**
+	 * 食品价格
+	 */
 	private float price;
 	public int getOrderId() {
 		return orderId;

@@ -43,7 +43,8 @@ public class EverydayServlet extends HttpServlet {
 	/**
 	 * everydayType 0为初始化出错，将WEB-INF/configs/everyDayOrder创建为一个文件，
 	 * 				1为初始化出错，WEB-INF/configs/everyDayOrder没有创建 
-	 * 				2为
+	 * 				2为该文件夹下面没有对应的文件
+	 * 				3为找到对应的文件并读取了文件数据
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,11 +75,12 @@ public class EverydayServlet extends HttpServlet {
 				if(subFile.isDirectory() && subFile.getName() == dateStr){//日期文件夹
 					DayOrderInfo dayInfo = new DayOrderInfo();
 					dayInfo.setDate(dateStr);
+					dayInfo.setTime(CheckUtil.getCurTime());
 					File[] subFiles = subFile.listFiles();
 					
 					int len = subFiles.length;
 					if(len <= 0){
-						request.setAttribute("everydayType", 3);
+						request.setAttribute("everydayType", 2);
 					}else{
 						TimeOrderInfo[] timeOrderInfos = new TimeOrderInfo[len];
 						
@@ -107,6 +109,8 @@ public class EverydayServlet extends HttpServlet {
 							timeOrderInfos[i] = timeOrderInfo;
 						}
 						dayInfo.setTimeOrderInfo(timeOrderInfos);
+						request.setAttribute("dayInfo", dayInfo);
+						request.setAttribute("everydayType", 3);
 					}
 				}
 			}

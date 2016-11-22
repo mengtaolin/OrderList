@@ -1,6 +1,9 @@
 package com.zhizhang.dao.selectOrder;
 
 public class TimeOrderInfo {
+	/**
+	 * 点餐时间  早餐，午餐，晚餐
+	 */
 	private String time;
 	private SelectOrderInfo[] selectOrderInfo;
 	public String getTime() {

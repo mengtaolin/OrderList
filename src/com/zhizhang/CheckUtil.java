@@ -20,6 +20,16 @@ public class CheckUtil {
 	private static int dinnerEndH 				= 0;
 	private static int dinnerEndM 				= 0;
 	
+	
+	/**
+	 * 传入timeType方法中，返回中文的早中晚餐
+	 */
+	public static int TIME_TYPE1 				= 1;
+	/**
+	 * 传入timeType方法中，返回英文的早中晚餐
+	 */
+	public static int TIME_TYPE2 				= 2;
+	
 	public static void init(Map<String,String> map){
 		timeMap 			= map;
 		breakfastStartH 	= Integer.parseInt(timeMap.get("breakfastStartH"));
@@ -56,66 +66,61 @@ public class CheckUtil {
 			return false;
 		}
 		
-		if(date.getHours() == lunchStartH){
-			if(date.getMinutes() >= lunchStartM){
+		if(checkByTime(date, breakfastStartH, breakfastStartM, breakfastEndH, breakfastEndM) == false){
+			if(checkByTime(date, lunchStartH, lunchStartM, lunchEndH, lunchEndM) == false){
+				return checkByTime(date, dinnerStratH, dinnerStratM, dinnerEndH, dinnerEndM);
+			}
+			else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+		
+	}
+	
+	private static boolean checkByTime(Date date, int startH, int startM, int endH, int endM){
+		int hour = date.getHours();
+		int minutes = date.getMinutes();
+		if(hour == startH){
+			if(minutes >= startM){
 				return true;
 			}
 			else{
 				return false;
 			}
-		}else if(date.getHours() == lunchEndH){
-			if(date.getMinutes() <= lunchEndM){
+		}else if(hour > startH){
+			if(hour < endH){
 				return true;
 			}
-			return false;
+			else if(hour == endH){
+				if(minutes <= endM){
+					return true;
+				}
+				return false;
+			}else{
+				return false;
+			}
 		}
 		return false;
 	}
 	
 	/**
 	 * 返回早上，中午，还是晚上
+	 * @param type 1为中文，2为英文
 	 * @return
 	 */
-	public static String timeType(){
+	public static String timeType(int type){
 		String str = "";
 		Date date = new Date(System.currentTimeMillis());
 		
-		@SuppressWarnings("deprecation")
-		int curHour = date.getHours();
-		@SuppressWarnings("deprecation")
-		int curMinutes = date.getMinutes();
-		if(breakfastStartH == curHour){
-			if(breakfastStartM <= curMinutes){
-				str = "早餐";
-			}
+		if(checkByTime(date, breakfastStartH, breakfastStartM, breakfastEndH, breakfastEndM)){
+			str = type == 1 ? "早餐" : "breakfast";
+		}else if(checkByTime(date, lunchStartH, lunchEndM, lunchEndH, lunchEndM)){
+			str = type == 1 ? "午餐" : "lunch";
+		}else if(checkByTime(date, dinnerStratH, dinnerStratM, dinnerEndH, dinnerEndM)){
+			str = type == 1 ? "晚餐" : "dinner";
 		}
-		if(breakfastEndH == curHour){
-			if(breakfastEndM > curMinutes){
-				str = "早餐";
-			}
-		}
-		
-		if(lunchStartH == curHour){
-			if(lunchStartM <= curMinutes){
-				str = "午餐";
-			}
-		}
-		if(lunchEndH == curHour){
-			if(lunchEndM > curMinutes){
-				str = "午餐";
-			}
-		}
-		if(dinnerStratH == curHour){
-			if(dinnerStratM <= curMinutes){
-				str = "晚餐";
-			}
-		}
-		if(dinnerEndH == curHour){
-			if(dinnerEndM > curMinutes){
-				str = "晚餐";
-			}
-		}
-		
 		return str;
 	}
 	
@@ -131,7 +136,7 @@ public class CheckUtil {
 	}
 	
 	/**
-	 * 返回 **-**-**
+	 * 返回 y-M-d
 	 * @return
 	 */
 	public static String getCurDate(){
@@ -140,7 +145,20 @@ public class CheckUtil {
 		String str = format.format(date);
 		return str;
 	}
-	
+	/**
+	 * 返回当前服务器时间 h:m:s
+	 * @return
+	 */
+	public static String getCurTime(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("h:m:s");
+		String str = format.format(date);
+		return str;
+	}
+	/**
+	 * 返回 y年M月d日
+	 * @return
+	 */
 	public static String getCurDate1(){
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat format = new SimpleDateFormat("y年M月d日");

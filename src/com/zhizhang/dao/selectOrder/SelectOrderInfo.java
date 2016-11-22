@@ -10,9 +10,21 @@ import com.zhizhang.interfaces.XmlInterface;
 
 @XmlRootElement
 public class SelectOrderInfo implements XmlInterface{
+	/**
+	 * 部门ID
+	 */
 	private int departmentId;
+	/**
+	 * 员工ID
+	 */
 	private int employeeId;
+	/**
+	 * 部门名称
+	 */
 	private String department;
+	/**
+	 * 员工姓名
+	 */
 	private String employee;
 	private OrderPriceInfo[] orderPriceInfo;
 	

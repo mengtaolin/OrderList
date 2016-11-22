@@ -99,7 +99,7 @@ public class DoOrderServlet extends HttpServlet {
 	
 	private void createXmlFile(SelectOrderInfo selectOrderInfo){
 		
-		String timeType = CheckUtil.timeType();
+		String timeType = CheckUtil.timeType(CheckUtil.TIME_TYPE1);
 		String realPath = this.getServletContext().getRealPath(CheckUtil.getPropValue("orderDir"));
 		String dateStr = CheckUtil.getCurDate();
 		String fileName = dateStr + "\\" + timeType + "\\" + selectOrderInfo.getDepartmentId() + "_" + selectOrderInfo.getEmployeeId() + ".xml";
@@ -110,7 +110,7 @@ public class DoOrderServlet extends HttpServlet {
 		}
 		File subFile = new File(dirName + "\\" + timeType);
 		if(subFile.exists() == false){
-			file.mkdirs();
+			subFile.mkdirs();
 		}
 		xmlUtil.create(selectOrderInfo, realPath + fileName);
 		file = null;
