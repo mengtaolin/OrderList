@@ -46,7 +46,6 @@ public class CheckUtil {
 		dinnerEndM 			= Integer.parseInt(timeMap.get("dinnerEndM"));
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static boolean checkTime(){
 		if(timeMap == null)return false;
 		Date date = new Date(System.currentTimeMillis());
@@ -80,7 +79,9 @@ public class CheckUtil {
 	}
 	
 	private static boolean checkByTime(Date date, int startH, int startM, int endH, int endM){
+		@SuppressWarnings("deprecation")
 		int hour = date.getHours();
+		@SuppressWarnings("deprecation")
 		int minutes = date.getMinutes();
 		if(hour == startH){
 			if(minutes >= startM){

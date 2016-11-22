@@ -32,7 +32,6 @@ import com.zhizhang.dao.AllOrderCompanyInfo;
 import com.zhizhang.dao.CompanyDataInfo;
 import com.zhizhang.dao.DepartmentInfo;
 import com.zhizhang.dao.OrderCompanyInfo;
-import com.zhizhang.dao.selectOrder.OrderPriceInfo;
 
 import net.sf.json.JSONObject;
 

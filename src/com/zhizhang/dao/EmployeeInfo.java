@@ -275,6 +275,7 @@ public class EmployeeInfo {
 	 * 将保存在xml中的详细资料读取出来
 	 * @param root
 	 */
+	@SuppressWarnings("deprecation")
 	public void parseAllInfo(Element root) {
 		this.setId(Integer.parseInt(root.elementText("id")));
 		this.setName(root.elementText("name")); 
@@ -303,6 +304,7 @@ public class EmployeeInfo {
 		this.setTelNum(root.elementText("telNum"));
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String parseToXml(){
 		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		xml += "<root>";
